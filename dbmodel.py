@@ -22,7 +22,8 @@ def get_stockData():
     for r in res:
         print(r)
 
-
+def sample():
+    
 
 
 if __name__=="__main__":
