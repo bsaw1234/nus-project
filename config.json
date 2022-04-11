@@ -1,0 +1,8 @@
+{
+        "username":"bsaw1234",
+        "password":"bsaw%401234",
+        "host":"bsaw-cluster-1.rxjnf.mongodb.net",
+        "dbname":"stock_db",
+        "tbl_name":"stock_info",
+        "stock_api": "https://stocknewsapi.com/api/v1?tickers=all&items=50&&page=5&token=enu3nb9i6fo49mcoofmoblcmfmqv5frajim3r4rx"
+}
