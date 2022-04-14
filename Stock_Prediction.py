@@ -30,9 +30,21 @@ from pmdarima import auto_arima
 
 #Scikit-Learn for Modeling
 from sklearn.metrics import mean_squared_error,r2_score, mean_absolute_error,mean_squared_log_error
+
 #df = pd.read_csv('stock_data_x.csv', sep=",")
 #df = pd.read_csv('C:/Users/baska/Downloads/NUS/Big Data/Projects/stock_data_y.csv').dropna()
-
+s3 = boto3.resource('s3',aws_access_key_id='AKIAR5SIOW5FPO6A7IFA', aws_secret_access_key='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')
+bucket-name = s3.Bucket('bsaw-client-info')
+s3 = boto3.client(
+    's3',
+    aws_access_key_id='AKIAR5SIOW5FPO6A7IFA',
+    aws_secret_access_key='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',
+    region_name='us-east-1'
+) 
+obj  = s3.get_object(Bucket='bucket-name', Key='stock_data.csv') #2
+data = obj['Body'].read().decode('utf-8').splitlines() #3
+df   = csv.reader(data) #4
+# Cleaning Data    
 l_0 = df.iloc[0].T
 df_0 = l_0.to_frame()
 df_0.columns = ["Day_0"]
@@ -94,7 +106,6 @@ for i in range(len(df.columns)):
      m = pd.merge(m,x,left_on="Date",right_on="Date")
      Predicted = m.to_csv('C:/Users/baska/Downloads/NUS/Big Data/Projects/pred_data.csv',encoding='utf-8')
      # Write the Predicted Stock Price to S3 
-     s3 = boto3.resource('s3',aws_access_key_id='AKIA2I4L5O2NZ532672T', aws_secret_access_key='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')
      bucket = s3.Bucket('bsaw-client-info','Predicted')
      result = object.put(Body=Predicted)
 # Get 30 days Predicted Price        
@@ -146,6 +157,5 @@ Trend = df_final
 
 #df_final.to_csv('C:/Users/baska/Downloads/NUS/Big Data/Projects/final_data.csv',encoding='utf-8',index=False)
 # Write the Predicted Trend Stock Price to S3 
-s3 = boto3.resource('s3',aws_access_key_id='AKIA2I4L5O2NZ532672T', aws_secret_access_key='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')
 bucket = s3.Bucket('bsaw-client-info','Trend')
 result = object.put(Body=Trend)
