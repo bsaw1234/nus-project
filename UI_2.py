@@ -1,4 +1,4 @@
-pip install Tkinter
+pip install tkinter
 
 from tkinter.ttk import Style
 
