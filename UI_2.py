@@ -1,3 +1,5 @@
+!pip install Tkinter
+
 from tkinter.ttk import Style
 
 import matplotlib
